@@ -11,11 +11,17 @@ Algoritmo:
 
 Inicio:
   1 - Bienvenida al usuario
+  
   2 - Se pide el nombre de la orden y fecha 
+  
   3 - Mediante un while True se muestra al usuario el menú completo de comida/bebidas con un identificador único
+  
   4 - Se pregunta al usuario que producto desea seleccionar
+  
   5 - El usuario ingresa el identificador único del producto
+  
   6 - Se muestran las especificaciones del producto (ingredientes, calorias, opción de ingredientes extras, precio)
+  
   7 - Se pregunta al usuario si desea agregar el producto a la orden
     7.1 - Si la respuesta es "Si", se agrega el producto a una lista llamada "orden"
       7.1.1 - Se pregunta al usuario si desea terminar la orden 
