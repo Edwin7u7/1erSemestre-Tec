@@ -23,26 +23,43 @@ Inicio:
   6 - Se muestran las especificaciones del producto (ingredientes, calorias, opción de ingredientes extras, precio)
   
   7 - Se pregunta al usuario si desea agregar el producto a la orden
+  
     7.1 - Si la respuesta es "Si", se agrega el producto a una lista llamada "orden"
+    
       7.1.1 - Se pregunta al usuario si desea terminar la orden 
+      
         7.1.1.1 - Si la respuesta es "Si" sumar a PrecioFinal el precio del producto.
+        
           7.1.1.1.1 - Romper el ciclo while True
+          
           7.1.1.1.2 - Saltar al paso 8
+          
         7.1.1.2 - Si la respuesta es "No", repetir el ciclo del paso 3.
+        
     7.2 - Si la respuesta es "No"
+    
       7.2.1 - Se pregunta al usuario si desea terminar la orden
+      
         7.2.1.1 Si la respuesta es "Si", romper el ciclo while True, saltar al paso 8
+        
         7.2.1.2 - Si la respuesta es "No", repetir el ciclo del paso 3.
 
   8 - if PrecioFinal == 0
+  
     condicion  es true
+    
     8.1 - Exit()
+    
     condicion es false
+    
     8.2 - Se muestra el ticket final al usuario con el precioFinal
+    
       8.2.1 - Se pregunta al usuario el % de propina 
+      
       8.2.2 - Se calcula el precioFinal con la propina aplicada
 
   9 - Se imprime el ticket final al usuario.
+  
 Fin del programa 
       
   
