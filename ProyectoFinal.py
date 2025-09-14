@@ -34,6 +34,7 @@ def mostrarInfoProducto(id,df):
 #Variables
 df = pd.read_excel("Menú.xlsx")
 precioTotal = 0
+
 print('===========================')
 #Aqui se inserta el nombre del restaurante o puesto de comida.
 print ('//Nombre del restaurante//')
@@ -67,41 +68,86 @@ print('1.2-',comidaTipo2,'...$',precioComida2,'\t2.2-',bebidaTipo2,'...$',precio
 print('1.3-',comidaTipo3,'...$',precioComida3,'\t2.3-',bebidaTipo3,'...$',precioBebida3)
 print('============================================')'''
 mostrarMenú(df)
-
-while True:
-    try:
-        #Inicio de Orden
-        print('------------------------------------------------')
-        iniciarOrden = input('¿DESEA INICIAR LA ORDEN?(1-Si)-->')
-        print('------------------------------------------------')
-        if iniciarOrden == '1' or iniciarOrden == 'Si':
-            #Se pide que el cliente agregue el nombre a que quiera asignar su orden.
+#Inicio de Orden
+try:
+    print('------------------------------------------------')
+    iniciarOrden = input('¿DESEA INICIAR LA ORDEN?(1-Si)-->')
+    print('------------------------------------------------')
+except:
+    print('Error. Intente de nuevo')
+    
+    
+if iniciarOrden == '1' or iniciarOrden == 'Si':
+    #Se pide que el cliente agregue el nombre a que quiera asignar su orden.
+    print('------------------------------------------------')
+    nombreOrden = input('¿A QUE NOMBRE DESEA AGREGRAR LA ORDEN?\n -->')
+    print('------------------------------------------------')
+    #Mensaje de bienvenida.
+    print('*********BIENVENIDO',nombreOrden.upper(),'*************')
+    while iniciarOrden == '1' or iniciarOrden == 'Si':   
+        try:
             print('------------------------------------------------')
-            nombreOrden = input('¿A QUE NOMBRE DESEA AGREGRAR LA ORDEN?\n -->')
-            print('------------------------------------------------')
-            #Mensaje de bienvenida.
-            print('*********BIENVENIDO',nombreOrden.upper(),'*************')
-        while iniciarOrden == '1' or iniciarOrden == 'Si':   
-            while True:
-                try:
-                    print('------------------------------------------------')
-                    prodSeleccionado = float(input('INGRESE EL ID DEL PRODUCTO-->'))
-                    precio = mostrarInfoProducto(prodSeleccionado,df)
+            prodSeleccionado = float(input('INGRESE EL ID DEL PRODUCTO-->'))
+            precio = mostrarInfoProducto(prodSeleccionado,df)
+            precio = int(precio)
+            if(precio != 0):
+                agregarProducto = input('DESEA AGREGAR EL PRODUCTO?(1:Si)(2:No)--->')
+                if(agregarProducto == 'Si' or agregarProducto == '1'):
+                    print('ProductoAgregado')
                     precio = int(precio)
-                    if(precio != 0):
-                        agregarProducto = input('DESEA AGREGAR EL PRODUCTO?(1:Si)--->')
-                        if(agregarProducto == 'Si' or agregarProducto == '1'):
-                            print('ProductoAgregado')
-                            precio = int(precio)
-                            precioTotal += precio
-                            print(f'Precio hasta el momento ----> {precioTotal}')
-                        else:
-                           print('ERROR.SELECCIONE DE NUEVO.') 
-                    else:
-                       print('Producto Inexistente.') 
-                except ValueError:
-                    print('ERROR.Ingresa un carácter válido.')
+                    precioTotal += precio
+                    print(f'Precio hasta el momento ----> {precioTotal}')
+                    terminar = input('Desea terminar la orden?(2-No)(1-Si)')
+                    if terminar in[ 'Si' , '1' ,'si']:
+                        iniciarOrden = '2'
+                        
+                    elif terminar in ['No' , '2' , 'no'] :
+                        iniciarOrden = '1'
+                elif (agregarProducto == 'No' or agregarProducto == '2' or agregarProducto == 'no'):
+                    terminar = input('Desea terminar la orden?(2-No)(1-Si)')
+                    
+                    if terminar in[ 'Si' , '1' ,'si']:
+                        iniciarOrden = '2'
+                    elif terminar in ['No' , '2' , 'no']:
+                        iniciarOrden = '1'
+                else:
+                    print('ERROR.SELECCIONE DE NUEVO.') 
 
-            
-    except:
-        print('ERROR.INTENTE DE NUEVO')
+                
+
+            else:
+                print('Producto Inexistente.') 
+        except ValueError:
+            print('ERROR.Ingresa un carácter válido.')
+else:
+    if(precioTotal != 0 or precioTotal > 0):
+        try:
+            propina = input('Ingresa el %porcentaje de propina: ')
+            propina = int(propina)
+            try:
+                if(propina >0):
+                    precioTotal = aplicar_propina(precioTotal, propina)
+                    print(f'El precio total es: ${precioTotal}')
+            except: 
+                print('Ingrese la propina positiva')
+        except ValueError:
+            print('Ingrese un caractér correcto...')
+    else:
+        print('Orden finalizada')
+        exit()  
+if(precioTotal != 0 or precioTotal > 0):
+    try:
+        propina = input('Ingresa el %porcentaje de propina: ')
+        propina = int(propina)
+        try:
+            if(propina >0):
+                precioTotal = aplicar_propina(precioTotal, propina)
+                print(f'El precio total es: ${precioTotal}')
+        except: 
+            print('Ingrese la propina positiva')
+    except ValueError:
+        print('Ingrese un caractér correcto...')
+else:
+    print('Orden finalizada')
+    exit()
+    
